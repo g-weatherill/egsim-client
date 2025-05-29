@@ -16,10 +16,12 @@ The `egsim-client` is a repository of Jupyter notebooks and other resources to d
 
 The notebooks contained within the first layer of the `notebooks` directory are kept aligned with the current version of the API at any time, and should therefore run without problem. Previous versions of the notebooks are kept in the sub-folder `notebooks/legacy`, and these are retained for reference but will not work with the current version of the API.
 
-The notebooks contain a mixture of basic usage (i.e. how to call the API, visualise and explore the outputs and perform some routine analysis) and advanced usage (i.e. how to integrate the eGSIM API more advanced scientific workflows). We recommend running notebooks from the `egsim-client` within a virtual environment, an explanation of which is found here: <https://docs.python.org/3/library/venv.html>
+The notebooks contain a mixture of basic usage (i.e. how to call the API, visualise and explore the outputs and perform some routine analysis) and advanced usage (i.e. how to integrate the eGSIM API more advanced scientific workflows). 
 
 
 ## Installation and Setup
+
+**We recommend running notebooks from the `egsim-client` within a virtual environment, an explanation of which is found here: <https://docs.python.org/3/library/venv.html>**
 
 Create your virtual environment (this repo is tested under Python 3.9.7 - 3.11.3) and run 
 ```
@@ -60,6 +62,61 @@ jupyter nbconvert --to html /path/to/notebook.ipynb
 ```
 
 ## Notebooks
+
+### `Model-to-Model`
+
+This notebook provides a general introduction to the use of the eGSIM API for model-to-model comparison. Steps include:
+
+* Example of how to load in and visualise data from an hdf5 output downloaded from the graphical interface of the model-to-model workflow
+
+* Use of the eGSIM API to produce trellis plots comparing different models for a set of scenarios (i.e. reproducing an online graphical interface workflow)
+
+* Use of the eGSIM API to compare the site amplification scaling of a set of ground motion models - a custom workflow not available via the graphical interface.
+
+
+### `Exploring Models using Dimensionality Reduction`
+
+This notebook shows an example of a more advanced model-to-model analysis that utilises the eGSIM API. Here the expected ground motions from a suite of GMMs are retrieved for a range of scenarios and intensity measures, which are input into a dimensionality reduction analysis to vizualise the model space of the GMMs.
+
+*This requires that the `scikit-learn` toolkit is installed.*
+
+Steps include:
+
+* Using the eGSIM API to find a sub-set of GMMs from the NGA East project, then retrieving the expected ground motions and visualising via a trellis plot.
+
+* Apply Sammons mapping to the expected GMMs and visualize the 2D representation
+
+* Apply and visualize the 2D representation of the GMMs resulting from Principal Component Analysis (PCA), t-Distributed Stochastic Neighbour Embedding (t-SNE), and Isomap.
+
+
+### `Model-to-Data`
+
+This notebook demonstrates how to use the model-to-data functionality of the eGSIM API to explore the fit of selected GMMs to ground motions from an example flatfile.
+
+**The flatfile is adapted from the Engineering Strong Motion Flatfile (Lanzano et al., 2019)**
+
+Steps include:
+
+* Apply a set of scoring metrics to a selection of GMMs using a sub-set of the sample data with the API.
+
+* Use the eGSIM API to extract the normalized between- and within-event residuals for a selection of GMMs, intensity measures and sub-set of the sample flatfile (reproduces a workflow available via the visual interface)
+
+*  Use the eGSIM API to extract the station-to-station residuals
+
+
+### `Comparing Observations and Simulations`
+
+This notebook shows how to use the eGSIM model-to-data functionality to perform a more detailed analysis by exploring the trends in random-effects residuals in a database of observed ground motions (adapted from the ESM flatfile) and a database of ground motions produced by a physics-based simulation software (BB-SPEED)
+
+**The flatfile of ground motion values from the physics-based simulation software is adapted from the BB-SPEEDset version 2.3 (Paolucci et al., 2021)**
+
+This notebook produces the example application shown in Zaccarelli et al. (2025 - *submitted*)
+
+Steps include:
+
+* Retrieval of the normalized random-effects residuals for the two flatfiles and comparisons in trends with respect to magnitude and distance.
+
+* Exploration of the residual trends for four earthquakes common to both flatfiles.  
 
 
 ## Data Sources
